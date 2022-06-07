@@ -1,0 +1,16 @@
+import pandas as pd
+
+url_psel_de_shows = "https://us-central1-raccoon-bi.cloudfunctions.net/psel_de_shows"
+
+url_psel_de_ingressos = "https://us-central1-raccoon-bi.cloudfunctions.net/psel_de_ingressos"
+
+url_psel_de_compras = "https://us-central1-raccoon-bi.cloudfunctions.net/psel_de_compras"
+ 
+df_psel_de_shows = pd.read_json(url_psel_de_shows)
+df_psel_de_shows
+
+df_psel_de_ingressos = pd.read_json(url_psel_de_ingressos)
+#df_psel_de_ingressos
+
+df_psel_de_compras = pd.read_csv(url_psel_de_compras)
+#df_psel_de_compras
