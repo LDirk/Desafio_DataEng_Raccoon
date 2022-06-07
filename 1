@@ -10,7 +10,9 @@ df_psel_de_shows = pd.read_json(url_psel_de_shows)
 df_psel_de_shows
 
 df_psel_de_ingressos = pd.read_json(url_psel_de_ingressos)
-#df_psel_de_ingressos
+df_psel_de_ingressos
 
 df_psel_de_compras = pd.read_csv(url_psel_de_compras)
-#df_psel_de_compras
+df_psel_de_compras
+
+df = df_psel_de_ingressos.loc[(df_psel_de_ingressos["tipo"] == "Pista")&(df_psel_de_ingressos["status"] == "Concluido")]
