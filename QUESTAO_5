@@ -19,5 +19,5 @@ df_1 = spark.sql("""
                     from 
                     psel_de_compras
                     where nome not in (select nome from  psel_de_ingressos where status = "Concluido" )
-                    """).show(100)
-
+                    """)#.show()
+df_1.createOrReplaceTempView("p1")
