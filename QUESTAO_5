@@ -24,8 +24,14 @@ df_1.createOrReplaceTempView("p1")
 
 # Escrevendo o Json
 
-nome = spark.sql(""" select nome from  p1 """)#.show()
 
-gastos = spark.sql(""" select gastos from  p1 """)#.show()
+nome = spark.sql(""" select nome from  p1 """).toPandas()  
+gastos = spark.sql(""" select gastos from  p1 """).toPandas()
+show = spark.sql(""" select show from  p1 """).toPandas()
 
-show = spark.sql(""" select show from  p1 """)#.show()
+df = pd.DataFrame(nome, columns = ["nome"])
+df = df.assign(gastos= gastos)
+df = df.assign(show=show )
+
+js = df.to_json(orient = 'columns')
+js
