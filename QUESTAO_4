@@ -1,0 +1,27 @@
+# Qual o dia com maior gasto ? 
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
+from pyspark.sql import SparkSession
+import findspark
+
+spark = SparkSession.builder.appName("Student_Info").getOrCreate()
+
+df_0 = spark.sql(""" select
+                    * ,
+                    CASE
+                      WHEN show = 'Terrestrial Chair' then '1'
+                      WHEN show ='Nascent Letter' then '2'
+                      WHEN show ='Symbolic Toy' then '3'
+                    END AS DIA
+                    FROM psel_de_compras""")#.show()
+df_0.createOrReplaceTempView("q0")
+
+df_1 = spark.sql (""" 
+                    select 
+                      DIA,
+                      sum(gastos) as gastos_total_do_dia 
+                    from q0 
+                   group by 1
+""").show()
+
+
+# Logo, o dia com mais gastos foi o dia 3 com um gasto total de 330810.92000000004
