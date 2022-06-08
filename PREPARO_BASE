@@ -34,33 +34,3 @@ df2 = spark.sql("SELECT * FROM psel_de_ingressos").show()
 df3 = spark.sql("SELECT * FROM psel_de_compras").show()
 
 
-# 1. Qual a média de gastos de pessoas com ingresso Pista?
-
-df_0 = spark.sql( "SELECT *, Case when dia=1 then 'Terrestrial Chair' when dia=2 then 'Nascent Letter' when dia=3 then 'Symbolic Toy' END AS show FROM psel_de_ingressos where tipo ='Pista'and status='Concluido' ")
-df_0.createOrReplaceTempView("q1")
-#df_0.show()
-
-df_x = spark.sql(""" select * from psel_de_compras where nome  = 'Donna Wal'  """)
-
-df_1 = spark.sql( " select nome as nome2, show as show2, gastos from  psel_de_compras ")
-df_1.createOrReplaceTempView("q2")
-
-
-df_2 = spark.sql(""" 
-SELECT q1.*, q2.*
- 
-from q1 as q1 
-left join q2 as q2
-on 
-q1.nome =q2.nome2 and q1.show=q2.show2 
-
-""" )
-
-df_2.createOrReplaceTempView("q3")
-
-df_3 = spark.sql( " select ano,dia,mes,nome,status,tipo,show,sum(gastos) as gastos from  q3 where gastos is not null  group by 1,2,3,4,5,6,7").show()
-
-#df_3.createOrReplaceTempView("q4")
-
-#df_4 = spark.sql( " select AVG(gastos) as MEDIA_DOS_GASTOS from  q4 ").show()
-# 3875
