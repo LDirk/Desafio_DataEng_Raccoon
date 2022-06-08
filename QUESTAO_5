@@ -21,3 +21,11 @@ df_1 = spark.sql("""
                     where nome not in (select nome from  psel_de_ingressos where status = "Concluido" )
                     """)#.show()
 df_1.createOrReplaceTempView("p1")
+
+# Escrevendo o Json
+
+nome = spark.sql(""" select nome from  p1 """)#.show()
+
+gastos = spark.sql(""" select gastos from  p1 """)#.show()
+
+show = spark.sql(""" select show from  p1 """)#.show()
