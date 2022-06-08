@@ -6,7 +6,12 @@ df_0 = spark.sql( """ select
                           * 
                       from  psel_de_ingressos 
                       where  status = "Concluido" 
-                      """)
+                      """)#.show()
 df_0.createOrReplaceTempView("q0")
 
-# Quais pessoas compraram e não foram, ou seja, não está na base psel_de_compras. 
+# Quais pessoas compraram e não foram, ou seja, não está na base psel_de_compras, mas estão na q1 
+df_1 = spark.sql( """ select 
+                      *
+                      from q0
+                      where nome not in (select nome from psel_de_compras)
+                  """  ).show()
