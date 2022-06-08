@@ -1,5 +1,5 @@
 # 3. Quais pessoas compraram ingressos com concorrentes?
-# Ou seja, estão no psel_de_compras, mas não estão no q0 
+# Ou seja, estão no psel_de_compras, mas não estão no q0 (Os clientes que compraram com a AT)
 
 
 df_0 = spark.sql( """ select 
