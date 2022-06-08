@@ -1,0 +1,12 @@
+# 2. Quais pessoas não compareceram aos shows? 
+
+# Quais pessoas compraram os ingressos?, base psel_de_ingressos 
+
+df_0 = spark.sql( """ select 
+                          * 
+                      from  psel_de_ingressos 
+                      where  status = "Concluido" 
+                      """)
+df_0.createOrReplaceTempView("q0")
+
+# Quais pessoas compraram e não foram, ou seja, não está na base psel_de_compras. 
