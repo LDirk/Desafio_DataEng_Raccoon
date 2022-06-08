@@ -1,0 +1,24 @@
+# Faça uma lista com os clientes que desistiram de comprar o ingresso com a AT, a
+# soma do valor que foi gasto durante os shows e quais shows eles desistiram de
+# comprar.
+
+# Desistiu de comprar com a AT, então status diferente de concluido na psel_de_compras e não comprou em outra tentativa. 
+
+# Clientes que compraram
+df_0 = spark.sql( """ select 
+                          *
+                      from  psel_de_ingressos
+                      where 
+                      status = "Concluido"
+                      """)
+
+# Clientes que foram no show 
+df_1 = spark.sql(""" 
+                    select 
+                        *
+                    from 
+                    psel_de_compras
+                    where nome not in (select nome from  psel_de_ingressos where status = "Concluido" )
+                    """).show(100)
+
+# Os clientes que desistiram de comprar com a AT são os clientes que foram no show, mas não estão no df dos clientes que compraram 
