@@ -1,0 +1,18 @@
+# 3. Quais pessoas compraram ingressos com concorrentes?
+# Ou seja, estão no psel_de_compras, mas não estão no q0 
+
+
+df_0 = spark.sql( """ select 
+                          * 
+                      from  psel_de_ingressos 
+                      where  status = "Concluido" 
+                      """)#.show()
+df_0.createOrReplaceTempView("q0")
+
+# Resposta
+df_0 = spark.sql(""" 
+        select
+              *
+        from psel_de_compras
+        where nome not in (select nome from q0)
+""").show()
