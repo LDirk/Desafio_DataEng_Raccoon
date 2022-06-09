@@ -25,3 +25,4 @@ df_1 = spark.sql ("""
 
 
 # Logo, o dia com mais gastos foi o dia 3 com um gasto total de 330810.92000000004
+# visto " manualmente", pois se trata apenas de 3 dias ..
